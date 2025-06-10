@@ -1,0 +1,20 @@
+# 使用 Python 基础镜像
+FROM python:3.9-slim
+
+# 设置工作目录
+WORKDIR /app
+
+# 创建日志目录
+RUN mkdir -p /app/logs
+
+# 复制当前目录下的所有文件到工作目录
+COPY . .
+
+# 安装所需的依赖
+RUN pip install numpy psutil
+ENV PYTHONUNBUFFERED=1
+RUN pip install memory_profiler
+
+
+# 运行 Python 脚本
+CMD ["python", "acnscode.py"]
